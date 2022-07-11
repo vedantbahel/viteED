@@ -8,7 +8,7 @@ Have suggestions for the design? Create new design issue.
 
 ## Tech Stack
 1. Flutter via dart
-2. appWrite as BaaS 
+2. Appwrite as BaaS 
 
 ## Call for Contribution
 Contribute to this project with your skill set. Since we started very recently, currently this app in it's basic phase with most of things un-done. 

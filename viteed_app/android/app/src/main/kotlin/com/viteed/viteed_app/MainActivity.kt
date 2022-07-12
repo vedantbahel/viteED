@@ -1,4 +1,4 @@
-package com.example.viteed_app
+package com.viteed.viteed_app
 
 import io.flutter.embedding.android.FlutterActivity
 

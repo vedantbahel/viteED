@@ -18,5 +18,8 @@ Steps to contribute:
 3. Clone and develop. 
 4. Test and Push the changes. 
 
+## Code of Conduct 
+Review the ![Code of Conduct](Code%20of%20Conduct.md)
+
 ## Feedback 
 Any feedback would be appreciated. Create a new feedback issue. 

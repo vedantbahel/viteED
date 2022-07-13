@@ -13,13 +13,13 @@ Have suggestions for the design? Create new design issue.
 ## Call for Contribution
 Contribute to this project with your skill set. Since we started very recently, currently this app in it's basic phase with most of things un-done. 
 Steps to contribute:
-1. Create an issue on what you plan to add
+1. Create an issue on what you plan to add or show intent of contribution to an existing un-assigned issue.
 2. Follow the discussion on the issue with other contributors 
 3. Clone and develop. 
 4. Test and Push the changes. 
 
 ## Code of Conduct 
-Review the ![Code of Conduct](Code%20of%20Conduct.md)
+Review the [Code of Conduct](Code%20of%20Conduct.md)
 
 ## Feedback 
 Any feedback would be appreciated. Create a new feedback issue. 

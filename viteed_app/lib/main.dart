@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:viteed_app/screens/home.dart';
 import 'package:viteed_app/screens/login.dart';
+import 'package:viteed_app/screens/signup.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,9 +15,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        '/': (context) => login(),
-        '/login': (context) => login(),
-        '/home': (context) => home(),
+        '/': (context) => Login(),
+        '/login': (context) => Login(),
+        '/home': (context) => const Home(),
+        '/signUp': (context) => SignUp()
       },
       debugShowCheckedModeBanner: false,
     );

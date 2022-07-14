@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:viteed_app/screens/forgotpassword.dart';
 import 'package:viteed_app/screens/home.dart';
 import 'package:viteed_app/screens/login.dart';
 import 'package:viteed_app/screens/signup.dart';
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => Login(),
         '/login': (context) => Login(),
         '/home': (context) => const Home(),
-        '/signUp': (context) => SignUp()
+        '/signUp': (context) => SignUp(),
+        '/forgotPassword': (context) => forgotPassword(),
       },
       debugShowCheckedModeBanner: false,
     );

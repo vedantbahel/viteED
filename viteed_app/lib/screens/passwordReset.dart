@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:viteed_app/screens/forgotpassword.dart';
 
-class Login extends StatelessWidget {
+class passwordReset extends StatelessWidget {
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  Login({Key? key}) : super(key: key);
+  passwordReset({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +43,7 @@ class Login extends StatelessWidget {
                           ),
                         ),
                         const Text(
-                          "Log In \n",
+                          "Password Reset \n",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 25),
                         ),
@@ -66,11 +65,11 @@ class Login extends StatelessWidget {
                                   ),
                                   fillColor: Colors.white.withOpacity(0.8),
                                   filled: true,
-                                  labelText: 'Email',
+                                  labelText: 'New Password',
                                   labelStyle: const TextStyle(
                                     color: Colors.black,
                                   ),
-                                  hintText: "abc@xyz.com"),
+                                  hintText: "******"),
                             ),
                           ),
                         ),
@@ -92,11 +91,11 @@ class Login extends StatelessWidget {
                                   ),
                                   fillColor: Colors.white.withOpacity(0.8),
                                   filled: true,
-                                  labelText: 'Password',
+                                  labelText: 'Confirm Password',
                                   labelStyle: const TextStyle(
                                     color: Colors.black,
                                   ),
-                                  hintText: "*********"),
+                                  hintText: "******"),
                             ),
                           ),
                         ),
@@ -125,34 +124,9 @@ class Login extends StatelessWidget {
                                 ),
                               ),
                               child: const Text(
-                                "Login",
+                                "Reset",
                                 style: TextStyle(fontSize: 22),
                               ),
-                            ),
-                          ),
-                        ),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => forgotPassword()));
-                            },
-                            child: const Text(
-                              "Forgot Password?",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: Color.fromARGB(255, 87, 87, 87)),
-                            )),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/signUp');
-                          },
-                          child: const Text(
-                            "Don't have an account? Sign Up",
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Color.fromARGB(255, 87, 87, 87),
                             ),
                           ),
                         ),

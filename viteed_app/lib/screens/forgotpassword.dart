@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:viteed_app/screens/forgotpassword.dart';
+import 'package:viteed_app/screens/passwordReset.dart';
 
-class Login extends StatelessWidget {
+class forgotPassword extends StatelessWidget {
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  Login({Key? key}) : super(key: key);
+  forgotPassword({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +44,7 @@ class Login extends StatelessWidget {
                           ),
                         ),
                         const Text(
-                          "Log In \n",
+                          "Forgot Password \n",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 25),
                         ),
@@ -92,11 +92,11 @@ class Login extends StatelessWidget {
                                   ),
                                   fillColor: Colors.white.withOpacity(0.8),
                                   filled: true,
-                                  labelText: 'Password',
+                                  labelText: 'OTP',
                                   labelStyle: const TextStyle(
                                     color: Colors.black,
                                   ),
-                                  hintText: "*********"),
+                                  hintText: "856904"),
                             ),
                           ),
                         ),
@@ -106,7 +106,13 @@ class Login extends StatelessWidget {
                             width: 300.0,
                             height: 50.0,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: ((context) =>
+                                            passwordReset())));
+                              },
                               style: ButtonStyle(
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
@@ -125,7 +131,7 @@ class Login extends StatelessWidget {
                                 ),
                               ),
                               child: const Text(
-                                "Login",
+                                "Set Password",
                                 style: TextStyle(fontSize: 22),
                               ),
                             ),
@@ -133,29 +139,14 @@ class Login extends StatelessWidget {
                         ),
                         TextButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => forgotPassword()));
+                              Navigator.pushNamed(context, '/login');
                             },
                             child: const Text(
-                              "Forgot Password?",
+                              "Already have an account? Login",
                               style: TextStyle(
                                   fontSize: 15,
                                   color: Color.fromARGB(255, 87, 87, 87)),
                             )),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/signUp');
-                          },
-                          child: const Text(
-                            "Don't have an account? Sign Up",
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Color.fromARGB(255, 87, 87, 87),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),

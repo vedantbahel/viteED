@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:viteed_app/information.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:viteed_app/auth/authenticaton.dart';
 import '../providers/provider.dart';
+
 
 class Home extends ConsumerWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
+
   Widget build(BuildContext context, WidgetRef ref) {
     final session = ref.watch(sessionProvider);
     return Scaffold(
@@ -51,5 +55,6 @@ class Home extends ConsumerWidget {
         child: const Icon(Icons.exit_to_app),
       ),
     );
+
   }
 }

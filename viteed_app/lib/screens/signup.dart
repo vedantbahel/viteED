@@ -1,13 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:viteed_app/auth/authenticaton.dart';
+import '../constants/validators.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
+
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
   final TextEditingController _emailTextController = TextEditingController();
+
   final TextEditingController _passwordTextController = TextEditingController();
+
   final TextEditingController _nameTextController = TextEditingController();
+
   final TextEditingController _usernameTextController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
-  SignUp({Key? key}) : super(key: key);
+  bool isVisible = false;
+
+  void signUp(BuildContext context) async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+    final res = await Authentication().signUp(
+      _emailTextController.text,
+      _passwordTextController.text,
+      _nameTextController.text,
+      _usernameTextController.text,
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(res),
+    ));
+
+    if (res == 'Account Created') {
+      Navigator.pop(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,8 +84,9 @@ class SignUp extends StatelessWidget {
                           padding: const EdgeInsets.all(10.0),
                           child: SizedBox(
                             width: 350.0,
-                            height: 60.0,
                             child: TextFormField(
+                              validator: (value) =>
+                                  Validators.validateName(name: value),
                               controller: _nameTextController,
                               decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
@@ -76,8 +111,9 @@ class SignUp extends StatelessWidget {
                           padding: const EdgeInsets.all(10.0),
                           child: SizedBox(
                             width: 350.0,
-                            height: 60.0,
                             child: TextFormField(
+                              validator: (value) =>
+                                  Validators.validateUname(name: value),
                               controller: _usernameTextController,
                               decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
@@ -102,9 +138,10 @@ class SignUp extends StatelessWidget {
                           padding: const EdgeInsets.all(10.0),
                           child: SizedBox(
                             width: 350.0,
-                            height: 60.0,
                             child: TextFormField(
                               controller: _emailTextController,
+                              validator: (value) =>
+                                  Validators.validateEmail(email: value),
                               decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
@@ -128,10 +165,20 @@ class SignUp extends StatelessWidget {
                           padding: const EdgeInsets.all(10.0),
                           child: SizedBox(
                             width: 350.0,
-                            height: 60.0,
                             child: TextFormField(
+                              obscureText: !isVisible,
                               controller: _passwordTextController,
+                              validator: (value) =>
+                                  Validators.validatePassword(password: value),
                               decoration: InputDecoration(
+                                  suffixIcon: IconButton(
+                                    onPressed: () => setState(() {
+                                      isVisible = !isVisible;
+                                    }),
+                                    icon: isVisible
+                                        ? const Icon(Icons.visibility_off)
+                                        : const Icon(Icons.visibility),
+                                  ),
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
                                           color: Colors.white, width: 2.0),
@@ -156,14 +203,11 @@ class SignUp extends StatelessWidget {
                             width: 300.0,
                             height: 50.0,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () => signUp(context),
                               style: ButtonStyle(
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
                                         Colors.white),
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        const Color.fromRGBO(162, 156, 244, 1)),
                                 shape: MaterialStateProperty.all<
                                     RoundedRectangleBorder>(
                                   RoundedRectangleBorder(

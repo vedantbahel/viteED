@@ -30,10 +30,12 @@ class _LoginState extends State<Login> {
       ref,
     );
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(res),
-    ));
     if (res == 'Logged in Successfully') {
+      /// mounted property must be checked after async gap
+      if (!mounted) return true;
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(res),
+      ));
       return true;
     } else {
       return false;
@@ -57,9 +59,12 @@ class _LoginState extends State<Login> {
               ),
             ),
           ),
-          Scaffold(
-            backgroundColor: Colors.transparent,
-            body: SingleChildScrollView(
+
+          /// removed inside [Scaffold] as it was unneccesary
+          GestureDetector(
+            /// when user click on screen other than required to unfocus primary focus and give user a good experience
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(0.8),
                 child: Center(
@@ -78,8 +83,7 @@ class _LoginState extends State<Login> {
                         ),
                         const Text(
                           "Log In \n",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 25),
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -87,24 +91,20 @@ class _LoginState extends State<Login> {
                             width: 350.0,
                             child: TextFormField(
                               controller: _emailTextController,
-                              validator: (value) =>
-                                  Validators.validateEmail(email: value),
+                              validator: (value) => Validators.validateEmail(email: value),
                               decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.white, width: 2.0),
-                                      borderRadius:
-                                          BorderRadius.circular(20.0)),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  fillColor: Colors.white.withOpacity(0.8),
-                                  filled: true,
-                                  labelText: 'Email',
-                                  labelStyle: const TextStyle(
-                                    color: Colors.black,
-                                  ),
-                                  hintText: "abc@xyz.com"),
+                                enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.white, width: 2.0), borderRadius: BorderRadius.circular(20.0)),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                fillColor: Colors.white.withOpacity(0.8),
+                                filled: true,
+                                labelText: 'Email',
+                                labelStyle: const TextStyle(
+                                  color: Colors.black,
+                                ),
+                                hintText: "abc@xyz.com",
+                              ),
                             ),
                           ),
                         ),
@@ -115,20 +115,16 @@ class _LoginState extends State<Login> {
                             child: TextFormField(
                               obscureText: !isVisible,
                               controller: _passwordTextController,
-                              validator: (value) =>
-                                  Validators.validatePassword(password: value),
+                              validator: (value) => Validators.validatePassword(password: value),
                               decoration: InputDecoration(
                                 suffixIcon: IconButton(
                                   onPressed: () => setState(() {
                                     isVisible = !isVisible;
                                   }),
-                                  icon: isVisible
-                                      ? const Icon(Icons.visibility_off)
-                                      : const Icon(Icons.visibility),
+                                  icon: isVisible ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.white, width: 2.0),
+                                  borderSide: const BorderSide(color: Colors.white, width: 2.0),
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 border: OutlineInputBorder(
@@ -161,11 +157,8 @@ class _LoginState extends State<Login> {
                                   _passwordTextController.clear();
                                 },
                                 style: ButtonStyle(
-                                  foregroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          Colors.white),
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
+                                  foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18.0),
                                       side: const BorderSide(
@@ -186,19 +179,32 @@ class _LoginState extends State<Login> {
                             onPressed: () {},
                             child: const Text(
                               "Forgot Password?",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: Color.fromARGB(255, 87, 87, 87)),
+
+                              /// changed its colour to make it more asthetic
+                              style: TextStyle(fontSize: 15, color: Colors.blueAccent),
                             )),
                         TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/signUp');
-                          },
-                          child: const Text(
-                            "Don't have an account? Sign Up",
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Color.fromARGB(255, 87, 87, 87),
+                          onPressed: () => Navigator.pushNamed(context, '/signUp'),
+
+                          /// Using Rich Text
+                          child: RichText(
+                            text: const TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: "Don't have an account? ",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Color.fromARGB(255, 87, 87, 87),
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: "Sign Up",
+                                  style: TextStyle(
+                                    color: Colors.blueAccent,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),

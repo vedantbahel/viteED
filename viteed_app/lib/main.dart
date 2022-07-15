@@ -12,10 +12,7 @@ void main() {
       child: MyApp(),
     ),
   );
-  client
-      .setEndpoint(Api().endPoint)
-      .setProject(Api().projectId)
-      .setSelfSigned(status: true);
+  client.setEndpoint(Api().endPoint).setProject(Api().projectId).setSelfSigned(status: true);
 }
 
 class MyApp extends StatelessWidget {
@@ -33,7 +30,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const Login(),
         '/login': (context) => const Login(),
         '/home': (context) => const Home(),
-        '/signUp': (context) => const SignUp()
+        '/signUp': (context) => const SignUp(),
       },
       debugShowCheckedModeBanner: false,
     );

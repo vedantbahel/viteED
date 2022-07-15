@@ -33,11 +33,15 @@ class _SignUpState extends State<SignUp> {
       _usernameTextController.text,
     );
 
+    /// mounted property must be checked after async gap
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(res),
     ));
 
     if (res == 'Account Created') {
+      /// mounted property must be checked after async gap
+      if (!mounted) return;
       Navigator.pop(context);
     }
   }
@@ -59,9 +63,9 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
           ),
-          Scaffold(
-            backgroundColor: Colors.transparent,
-            body: SingleChildScrollView(
+          GestureDetector(
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(0.8),
                 child: Center(
@@ -77,23 +81,16 @@ class _SignUpState extends State<SignUp> {
                             height: 250,
                           ),
                         ),
-                        const Text("Sign Up \n",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 25)),
+                        const Text("Sign Up \n", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: SizedBox(
                             width: 350.0,
                             child: TextFormField(
-                              validator: (value) =>
-                                  Validators.validateName(name: value),
+                              validator: (value) => Validators.validateName(name: value),
                               controller: _nameTextController,
                               decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.white, width: 2.0),
-                                      borderRadius:
-                                          BorderRadius.circular(20.0)),
+                                  enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.white, width: 2.0), borderRadius: BorderRadius.circular(20.0)),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
                                   ),
@@ -112,25 +109,21 @@ class _SignUpState extends State<SignUp> {
                           child: SizedBox(
                             width: 350.0,
                             child: TextFormField(
-                              validator: (value) =>
-                                  Validators.validateUname(name: value),
+                              validator: (value) => Validators.validateUname(name: value),
                               controller: _usernameTextController,
                               decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.white, width: 2.0),
-                                      borderRadius:
-                                          BorderRadius.circular(20.0)),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  fillColor: Colors.white.withOpacity(0.8),
-                                  filled: true,
-                                  labelText: 'Username',
-                                  labelStyle: const TextStyle(
-                                    color: Colors.black,
-                                  ),
-                                  hintText: "john_doe"),
+                                enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.white, width: 2.0), borderRadius: BorderRadius.circular(20.0)),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                fillColor: Colors.white.withOpacity(0.8),
+                                filled: true,
+                                labelText: 'Username',
+                                labelStyle: const TextStyle(
+                                  color: Colors.black,
+                                ),
+                                hintText: "john_doe",
+                              ),
                             ),
                           ),
                         ),
@@ -140,14 +133,9 @@ class _SignUpState extends State<SignUp> {
                             width: 350.0,
                             child: TextFormField(
                               controller: _emailTextController,
-                              validator: (value) =>
-                                  Validators.validateEmail(email: value),
+                              validator: (value) => Validators.validateEmail(email: value),
                               decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.white, width: 2.0),
-                                      borderRadius:
-                                          BorderRadius.circular(20.0)),
+                                  enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.white, width: 2.0), borderRadius: BorderRadius.circular(20.0)),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
                                   ),
@@ -168,22 +156,15 @@ class _SignUpState extends State<SignUp> {
                             child: TextFormField(
                               obscureText: !isVisible,
                               controller: _passwordTextController,
-                              validator: (value) =>
-                                  Validators.validatePassword(password: value),
+                              validator: (value) => Validators.validatePassword(password: value),
                               decoration: InputDecoration(
                                   suffixIcon: IconButton(
                                     onPressed: () => setState(() {
                                       isVisible = !isVisible;
                                     }),
-                                    icon: isVisible
-                                        ? const Icon(Icons.visibility_off)
-                                        : const Icon(Icons.visibility),
+                                    icon: isVisible ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
                                   ),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.white, width: 2.0),
-                                      borderRadius:
-                                          BorderRadius.circular(20.0)),
+                                  enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.white, width: 2.0), borderRadius: BorderRadius.circular(20.0)),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
                                   ),
@@ -205,11 +186,8 @@ class _SignUpState extends State<SignUp> {
                             child: ElevatedButton(
                               onPressed: () => signUp(context),
                               style: ButtonStyle(
-                                foregroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.white),
-                                shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
+                                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18.0),
                                     side: const BorderSide(
@@ -226,14 +204,25 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                         TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text(
-                            "Already have an account? LogIn",
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Color.fromARGB(255, 87, 87, 87),
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: RichText(
+                            text: const TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: "Already have an account? ",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Color.fromARGB(255, 87, 87, 87),
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: "LogIn",
+                                  style: TextStyle(
+                                    color: Colors.blueAccent,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),

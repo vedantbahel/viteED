@@ -32,16 +32,15 @@ class Authentication {
   ) async {
     Account account = Account(client);
     try {
-      await account.create(
-          userId: uname, email: email, password: pass, name: name);
+      await account.create(userId: uname, email: email, password: pass, name: name);
       return 'Account Created';
     } on AppwriteException catch (e) {
+      debugPrint("exception sign up: $e");
       return e.message!;
     }
   }
 
-  Future<bool> logout(
-      WidgetRef ref, String sessId, BuildContext context) async {
+  Future<bool> logout(WidgetRef ref, String sessId, BuildContext context) async {
     Account account = Account(client);
     try {
       await account.deleteSession(sessionId: sessId);

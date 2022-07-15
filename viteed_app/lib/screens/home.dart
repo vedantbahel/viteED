@@ -8,13 +8,14 @@ import '../providers/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Home extends StatelessWidget {
+class Home extends ConsumerWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final session = ref.watch(sessionProvider);
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 229, 228, 247),
         appBar: AppBar(
@@ -62,19 +63,18 @@ class Home extends StatelessWidget {
                       ),
                       cursorColor: Color.fromRGBO(162, 156, 244, 1),
                     ))),
-
-            //
           ],
         ),
-        body:
-            //   Center(
-            //   child: Text(
-            //     'Welcome ${session.userId}',
-            //     style: const TextStyle(
-            //       fontSize: 20,
-            //     ),
-            //   ),
-            // ),
+        body: Column(
+          children: [
+            Center(
+              child: Text(
+                'Welcome ${session.userId}',
+                style: const TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
             ListView.builder(
                 itemCount: topics.length,
                 itemBuilder: (context, index) {
@@ -98,6 +98,8 @@ class Home extends StatelessWidget {
                     ),
                   );
                 }),
+          ],
+        ),
         //       floatingActionButton: FloatingActionButton(
         //   tooltip: 'LogOut',
         //   onPressed: () {

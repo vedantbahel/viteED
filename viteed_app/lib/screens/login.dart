@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:viteed_app/screens/forgotpassword.dart';
+import 'package:viteed_app/screens/home.dart';
 
 class Login extends StatelessWidget {
   final TextEditingController _emailTextController = TextEditingController();
@@ -106,7 +107,12 @@ class Login extends StatelessWidget {
                             width: 300.0,
                             height: 50.0,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Home()));
+                              },
                               style: ButtonStyle(
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(

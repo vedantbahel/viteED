@@ -18,7 +18,25 @@ class Home extends StatelessWidget {
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 229, 228, 247),
         appBar: AppBar(
-          toolbarHeight: 80,
+          //   centerTitle: true,
+          // elevation: 0,
+          //   toolbarHeight: 80,
+          //    backgroundColor: Colors.white,
+          // title: const Center(
+          //   child: Image(
+          //     image: AssetImage("images/ViteEDLogo.png"),
+          //     width: 250,
+          //     height: 100,
+          //   ),
+          // ),
+          //   actions: <Widget>[
+          //   IconButton(
+          //     onPressed: () {},
+          //     icon: const Icon(Icons.person),
+          //     color: const Color.fromRGBO(162, 156, 244, 1),
+          //   )
+          // ],
+          // shadowColor:
           backgroundColor: Color.fromARGB(255, 229, 228, 247),
           elevation: 1.8,
           actions: [
@@ -48,29 +66,49 @@ class Home extends StatelessWidget {
             //
           ],
         ),
-        body: ListView.builder(
-            itemCount: topics.length,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.only(top: 8, bottom: 12),
-                padding: EdgeInsets.only(left: 20),
-                height: 190,
-                width: width,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      topics[index]["name"]!,
-                      style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              fontSize: 25,
-                              color: Color.fromRGBO(162, 156, 244, 1))),
+        body:
+            //   Center(
+            //   child: Text(
+            //     'Welcome ${session.userId}',
+            //     style: const TextStyle(
+            //       fontSize: 20,
+            //     ),
+            //   ),
+            // ),
+            ListView.builder(
+                itemCount: topics.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: EdgeInsets.only(top: 8, bottom: 12),
+                    padding: EdgeInsets.only(left: 20),
+                    height: 190,
+                    width: width,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          topics[index]["name"]!,
+                          style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  fontSize: 25,
+                                  color: Color.fromRGBO(162, 156, 244, 1))),
+                        ),
+                        scrollbarBuild(),
+                      ],
                     ),
-                    scrollbarBuild(),
-                  ],
-                ),
-              );
-            }),
+                  );
+                }),
+        //       floatingActionButton: FloatingActionButton(
+        //   tooltip: 'LogOut',
+        //   onPressed: () {
+        //     Authentication().logout(ref, session.$id, context).then(
+        //           (value) => {
+        //             if (value) {Navigator.pop(context)}
+        //           },
+        //         );
+        //   },
+        //   child: const Icon(Icons.exit_to_app),
+        // ),
         bottomNavigationBar: BottomNavigationBar(
           items: [
             const BottomNavigationBarItem(

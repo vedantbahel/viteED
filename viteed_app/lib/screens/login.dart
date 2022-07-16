@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:viteed_app/screens/forgotpassword.dart';
+import 'package:viteed_app/screens/home.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:viteed_app/auth/authenticaton.dart';
 import '../constants/validators.dart';
+
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -146,6 +149,7 @@ class _LoginState extends State<Login> {
                           child: SizedBox(
                             width: 300.0,
                             height: 50.0,
+
                             child: Consumer(
                               builder: (context, ref, child) => ElevatedButton(
                                 onPressed: () {
@@ -164,6 +168,7 @@ class _LoginState extends State<Login> {
                                       side: const BorderSide(
                                         color: Color.fromARGB(1, 162, 156, 244),
                                       ),
+
                                     ),
                                   ),
                                 ),
@@ -176,7 +181,12 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                         TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => forgotPassword()));
+                            },
                             child: const Text(
                               "Forgot Password?",
 

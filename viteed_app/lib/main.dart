@@ -5,6 +5,7 @@ import 'package:viteed_app/constants/color.dart';
 import 'package:viteed_app/screens/home.dart';
 import 'package:viteed_app/screens/login.dart';
 import 'package:viteed_app/screens/signup.dart';
+import 'package:viteed_app/screens/forgotpassword.dart';
 
 void main() {
   runApp(
@@ -31,6 +32,8 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const Login(),
         '/home': (context) => const Home(),
         '/signUp': (context) => const SignUp(),
+        '/forgotPassword': (context) => forgotPassword(),
+        '/signUp': (context) => const SignUp()
       },
       debugShowCheckedModeBanner: false,
     );

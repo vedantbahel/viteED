@@ -18,6 +18,8 @@ Steps to contribute:
 3. Clone and develop. 
 4. Test and Push the changes. 
 
+We also look forward to develop viteED web-app. Contributions and suggestions are highly welcomed. 
+
 ## Code of Conduct 
 Review the [Code of Conduct](Code%20of%20Conduct.md)
 

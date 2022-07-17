@@ -159,7 +159,7 @@ class _LoginState extends State<Login> {
                                 onPressed: () {
                                   logIn(context, ref).then((value) {
                                     if (value) {
-                                      Navigator.pushNamed(context, '/home');
+                                      Navigator.pushNamed(context, '/bottomnav');
                                     }
                                   });
                                   _passwordTextController.clear();

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:viteed_app/information.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:viteed_app/screens/profile.dart';
 import '../providers/provider.dart';
 
 class Home extends ConsumerWidget {
@@ -35,8 +36,9 @@ class Home extends ConsumerWidget {
         // shadowColor:
         backgroundColor: const Color.fromARGB(255, 229, 228, 247),
         elevation: 1.8,
+        automaticallyImplyLeading: false,
         actions: [
-          const SizedBox(width: 10),
+          const SizedBox(width: 20),
           Image.asset(
             "images/ViteEDLogo.png",
             scale: 5,
@@ -64,14 +66,12 @@ class Home extends ConsumerWidget {
         ],
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Center(
-            child: Text(
-              'Welcome ${session.userId}',
-              style: const TextStyle(
-                fontSize: 20,
-              ),
-            ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, top: 10),
+            child: Text('Welcome ${session.userId} ☺',
+                style: GoogleFonts.poppins(textStyle: TextStyle(fontSize: 20))),
           ),
           Expanded(
             child: ListView.builder(
@@ -112,27 +112,6 @@ class Home extends ConsumerWidget {
       //   },
       //   child: const Icon(Icons.exit_to_app),
       // ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.message_outlined),
-              label: "Message",
-              backgroundColor: Color.fromRGBO(162, 156, 244, 1)),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.save),
-              label: "Save",
-              backgroundColor: Color.fromRGBO(162, 156, 244, 1)),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.add),
-              label: "Add",
-              backgroundColor: Color.fromRGBO(162, 156, 244, 1)),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_box_outlined),
-              label: "Profile",
-              backgroundColor: Color.fromRGBO(162, 156, 244, 1))
-        ],
-        selectedItemColor: const Color.fromARGB(255, 229, 228, 247),
-      ),
     );
   }
 

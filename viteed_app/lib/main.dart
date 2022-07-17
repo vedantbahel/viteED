@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:viteed_app/constants/apis.dart';
 import 'package:viteed_app/constants/color.dart';
+import 'package:viteed_app/screens/bottomnav.dart';
 import 'package:viteed_app/screens/home.dart';
 import 'package:viteed_app/screens/login.dart';
+import 'package:viteed_app/screens/profile.dart';
 import 'package:viteed_app/screens/signup.dart';
 import 'package:viteed_app/screens/forgotpassword.dart';
 
@@ -33,10 +35,11 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const Login(),
         '/login': (context) => const Login(),
+        '/bottomnav': (context) => const BottomNav(),
         '/home': (context) => const Home(),
         '/forgotPassword': (context) => forgotPassword(),
-        '/signUp': (context) => const SignUp()
-
+        '/signUp': (context) => const SignUp(),
+        '/Profile': (context) => const Profile(),
       },
       debugShowCheckedModeBanner: false,
     );

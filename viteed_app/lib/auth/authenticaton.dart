@@ -2,7 +2,7 @@ import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:viteed_app/constants/.dart';
+import 'package:viteed_app/constants/app_constants.dart';
 import 'package:viteed_app/providers/provider.dart';
 
 class Authentication {

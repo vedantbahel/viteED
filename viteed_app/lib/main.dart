@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:viteed_app/constants/apis.dart';
-import 'package:viteed_app/constants/color.dart';
+import 'package:viteed_app/constants/app_colors.dart';
+import 'package:viteed_app/constants/app_constants.dart';
 import 'package:viteed_app/screens/bottomnav.dart';
+import 'package:viteed_app/screens/forgotpassword.dart';
 import 'package:viteed_app/screens/home.dart';
 import 'package:viteed_app/screens/login.dart';
 import 'package:viteed_app/screens/profile.dart';
 import 'package:viteed_app/screens/signup.dart';
-import 'package:viteed_app/screens/forgotpassword.dart';
 
 void main() {
   runApp(
@@ -16,8 +16,8 @@ void main() {
     ),
   );
   client
-      .setEndpoint(Api().endPoint)
-      .setProject(Api().projectId)
+      .setEndpoint(AppConstants.endPoint)
+      .setProject(AppConstants.projectId)
       .setSelfSigned(status: true);
 }
 

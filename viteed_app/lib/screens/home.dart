@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:viteed_app/information.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:viteed_app/screens/profile.dart';
+import 'package:viteed_app/widgets/display_card.dart';
 import '../providers/provider.dart';
 
 class Home extends ConsumerWidget {
@@ -123,17 +124,34 @@ class Home extends ConsumerWidget {
         physics: const BouncingScrollPhysics(),
         itemCount: trending.length,
         itemBuilder: (context, index) {
-          return Container(
-            margin:
-                const EdgeInsets.only(top: 12, bottom: 12, left: 5, right: 20),
-            height: 100,
-            width: 100,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(trending[index]["imagePath"]!)),
-                border: Border.all(
-                    color: const Color.fromRGBO(162, 156, 244, 1), width: 2),
-                borderRadius: BorderRadius.circular(15)),
+          return GestureDetector(
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (_) {
+                    return DisplayCard(
+                        title: "Figma 101",
+                        content:
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation"
+                            " ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat "
+                            "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab"
+                            " illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
+                        author: "John Doe",
+                        likes: 44);
+                  });
+            },
+            child: Container(
+              margin: const EdgeInsets.only(
+                  top: 12, bottom: 12, left: 5, right: 20),
+              height: 100,
+              width: 100,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(trending[index]["imagePath"]!)),
+                  border: Border.all(
+                      color: const Color.fromRGBO(162, 156, 244, 1), width: 2),
+                  borderRadius: BorderRadius.circular(15)),
+            ),
           );
         },
       ),

@@ -7,7 +7,7 @@ class Domain {
   final int id;
   final String name;
 
-  Domain({
+  const Domain({
     required this.id,
     required this.name,
   });
@@ -22,12 +22,12 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   static final List<Domain?> _domains = [
-    Domain(id: 1, name: "Software Engineering"),
-    Domain(id: 2, name: "Web Dev"),
-    Domain(id: 3, name: "Mobile App Dev"),
-    Domain(id: 4, name: "Product Designing"),
-    Domain(id: 5, name: "Machine learning"),
-    Domain(id: 6, name: "Cyber Security"),
+    const Domain(id: 1, name: "Software Engineering"),
+    const Domain(id: 2, name: "Web Dev"),
+    const Domain(id: 3, name: "Mobile App Dev"),
+    const Domain(id: 4, name: "Product Designing"),
+    const Domain(id: 5, name: "Machine learning"),
+    const Domain(id: 6, name: "Cyber Security"),
   ];
   final _items = _domains
       .map((domain) => MultiSelectItem<Domain>(domain!, domain.name))

@@ -20,6 +20,15 @@ Steps to contribute:
 
 We also look forward to develop viteED web-app. Contributions and suggestions are highly welcomed. 
 
+## Database Structure 
+Following is the structure of database that has been created using Appwrite. 
+
+1. posts
+Columns: [postid, username, title, datetime, content, topics, status(posted or draft?)]
+2. users
+Columns: [username, avatar, topictags]  
+ 
+
 ## Code of Conduct 
 Review the [Code of Conduct](Code%20of%20Conduct.md)
 

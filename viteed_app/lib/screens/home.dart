@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:viteed_app/information.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:viteed_app/screens/profile.dart';
+import 'package:viteed_app/widgets/compose_card.dart';
 import 'package:viteed_app/widgets/display_card.dart';
 import '../providers/provider.dart';
 
@@ -65,6 +66,12 @@ class Home extends ConsumerWidget {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          showDialog(context: context, builder: (_)=> ComposeCard());
+        },
+        child: Icon(Icons.add, size: 31,),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

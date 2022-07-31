@@ -1,17 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:viteed_app/auth/authenticaton.dart';
 import '../constants/validators.dart';
-
-class Domain {
-  final int id;
-  final String name;
-
-  const Domain({
-    required this.id,
-    required this.name,
-  });
-}
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -21,19 +10,6 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  static final List<Domain?> _domains = [
-    const Domain(id: 1, name: "Software Engineering"),
-    const Domain(id: 2, name: "Web Dev"),
-    const Domain(id: 3, name: "Mobile App Dev"),
-    const Domain(id: 4, name: "Product Designing"),
-    const Domain(id: 5, name: "Machine learning"),
-    const Domain(id: 6, name: "Cyber Security"),
-  ];
-  final _items = _domains
-      .map((domain) => MultiSelectItem<Domain>(domain!, domain.name))
-      .toList();
-  List<Domain> _selectedDomainsConfirm = [];
-
   final TextEditingController _emailTextController = TextEditingController();
 
   final TextEditingController _passwordTextController = TextEditingController();
@@ -43,7 +19,6 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _usernameTextController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-  final _multiSelectKey = GlobalKey<FormFieldState>();
 
   bool isVisible = false;
 
@@ -65,13 +40,6 @@ class _SignUpState extends State<SignUp> {
     if (res == 'Account Created') {
       Navigator.pop(context);
     }
-  }
-
-  List<Domain> _selectedDomainInitial = [];
-  @override
-  void initState() {
-    List<Domain?> _selectedDomainInitial = _domains;
-    super.initState();
   }
 
   @override
@@ -232,61 +200,6 @@ class _SignUpState extends State<SignUp> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: SizedBox(
-                            width: 353.0,
-                            child: MultiSelectBottomSheetField<Domain?>(
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  border: Border.all(
-                                    color: Colors.white,
-                                    width: 9,
-                                  )),
-                              key: _multiSelectKey,
-                              initialChildSize: 0.5,
-                              maxChildSize: 0.90,
-                              title: const Text("Select Domains"),
-                              buttonText: const Text(
-                                "Domains",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.black,
-                                ),
-                                textAlign: TextAlign.left,
-                              ),
-                              items: _items,
-                              searchable: true,
-                              validator: (values) {
-                                if (values == null || values.isEmpty) {
-                                  return "Required";
-                                }
-                                if (values.length < 3) {
-                                  return "Minimum 3 required";
-                                }
-
-                                return null;
-                              },
-                              onConfirm: (values) {
-                                setState(() {
-                                  List<Domain?> _selectedDomainsConfirm =
-                                      values;
-                                });
-                                _multiSelectKey.currentState!.validate();
-                              },
-                              chipDisplay: MultiSelectChipDisplay(
-                                onTap: (item) {
-                                  setState(() {
-                                    _selectedDomainsConfirm.remove(item);
-                                  });
-                                  _multiSelectKey.currentState!.validate();
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: SizedBox(
                             width: 300.0,
                             height: 50.0,
                             child: ElevatedButton(
@@ -306,7 +219,7 @@ class _SignUpState extends State<SignUp> {
                                 ),
                               ),
                               child: const Text(
-                                "Sign Up",
+                                "SignUp",
                                 style: TextStyle(fontSize: 22),
                               ),
                             ),

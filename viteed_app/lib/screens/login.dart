@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:viteed_app/screens/forgotpassword.dart';
-import 'package:viteed_app/screens/home.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:viteed_app/auth/authenticaton.dart';
 import '../constants/validators.dart';
@@ -192,7 +191,7 @@ class _LoginState extends State<Login> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => forgotPassword()));
+                                      builder: (context) => ForgotPassword()));
                             },
                             child: const Text(
                               "Forgot Password?",

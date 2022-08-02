@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:viteed_app/screens/passwordReset.dart';
+import 'package:viteed_app/screens/password_reset.dart';
 
-class forgotPassword extends StatelessWidget {
+class ForgotPassword extends StatelessWidget {
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  forgotPassword({Key? key}) : super(key: key);
+  ForgotPassword({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,7 +111,7 @@ class forgotPassword extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                         builder: ((context) =>
-                                            passwordReset())));
+                                            PasswordReset())));
                               },
                               style: ButtonStyle(
                                 foregroundColor:

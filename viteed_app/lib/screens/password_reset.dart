@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class passwordReset extends StatelessWidget {
+class PasswordReset extends StatelessWidget {
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  passwordReset({Key? key}) : super(key: key);
+  PasswordReset({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

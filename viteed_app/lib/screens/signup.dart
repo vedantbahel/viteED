@@ -32,7 +32,7 @@ class _SignUpState extends State<SignUp> {
   final _items = _domains
       .map((domain) => MultiSelectItem<Domain>(domain!, domain.name))
       .toList();
-  List<Domain> _selectedDomainsConfirm = [];
+  List<Domain?> selectedDomainsConfirm = [];
 
   final TextEditingController _emailTextController = TextEditingController();
 
@@ -56,6 +56,7 @@ class _SignUpState extends State<SignUp> {
       _passwordTextController.text,
       _nameTextController.text,
       _usernameTextController.text,
+      selectedDomainsConfirm.map((domain) => domain!.name).toList(),
     );
 
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -67,10 +68,8 @@ class _SignUpState extends State<SignUp> {
     }
   }
 
-  List<Domain> _selectedDomainInitial = [];
   @override
   void initState() {
-    List<Domain?> _selectedDomainInitial = _domains;
     super.initState();
   }
 
@@ -268,15 +267,14 @@ class _SignUpState extends State<SignUp> {
                               },
                               onConfirm: (values) {
                                 setState(() {
-                                  List<Domain?> _selectedDomainsConfirm =
-                                      values;
+                                  selectedDomainsConfirm = values;
                                 });
                                 _multiSelectKey.currentState!.validate();
                               },
                               chipDisplay: MultiSelectChipDisplay(
                                 onTap: (item) {
                                   setState(() {
-                                    _selectedDomainsConfirm.remove(item);
+                                    selectedDomainsConfirm.remove(item);
                                   });
                                   _multiSelectKey.currentState!.validate();
                                 },
@@ -290,7 +288,9 @@ class _SignUpState extends State<SignUp> {
                             width: 300.0,
                             height: 50.0,
                             child: ElevatedButton(
-                              onPressed: () => signUp(context),
+                              onPressed: () {
+                                signUp(context);
+                              },
                               style: ButtonStyle(
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(

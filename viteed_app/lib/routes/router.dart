@@ -4,7 +4,7 @@ import 'package:viteed_app/routes/route_names.dart';
 import 'package:viteed_app/screens/forgotpassword.dart';
 import 'package:viteed_app/screens/home.dart';
 import 'package:viteed_app/screens/login.dart';
-import 'package:viteed_app/screens/passwordReset.dart';
+import 'package:viteed_app/screens/password_reset.dart';
 import 'package:viteed_app/screens/signup.dart';
 
 final appRouter = GoRouter(routes: appRoutes);
@@ -12,9 +12,9 @@ final appRouter = GoRouter(routes: appRoutes);
 final appRoutes = <GoRoute>[
   _generateGoRoute(AppRouteNames.loginScreen, const Login()),
   _generateGoRoute(AppRouteNames.signUpScreen, const SignUp()),
-  _generateGoRoute(AppRouteNames.passwordResetScreen, passwordReset()),
+  _generateGoRoute(AppRouteNames.passwordResetScreen, PasswordReset()),
   _generateGoRoute(AppRouteNames.homeScreen, const Home()),
-  _generateGoRoute(AppRouteNames.forgotPasswordScreen, forgotPassword()),
+  _generateGoRoute(AppRouteNames.forgotPasswordScreen, ForgotPassword()),
 ];
 
 GoRoute _generateGoRoute(String path, Widget child) {

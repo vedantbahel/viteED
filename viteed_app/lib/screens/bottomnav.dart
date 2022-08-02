@@ -12,18 +12,18 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   int count = 0;
   final screens = [
-    Home(),
-    Center(child: Text("Message")),
-    Center(child: Text("Add")),
-    Center(child: Text("Save")),
-    Profile()
+    const Home(),
+    const Center(child: Text("Message")),
+    const Center(child: Text("Add")),
+    const Center(child: Text("Save")),
+    const Profile()
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: screens[count],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color.fromRGBO(162, 156, 244, 1),
+        backgroundColor: const Color.fromRGBO(162, 156, 244, 1),
         type: BottomNavigationBarType.fixed,
         currentIndex: count,
         onTap: (index) => setState(() => count = index),

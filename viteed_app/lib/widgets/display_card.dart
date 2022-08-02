@@ -3,21 +3,22 @@ import 'package:google_fonts/google_fonts.dart';
 
 class DisplayCard extends StatelessWidget {
   final String title, content, author;
-  int likes;
-  bool userHasLiked;
+  final int likes;
+  final bool userHasLiked;
 
-  DisplayCard({
-    required this.title,
-    required this.content,
-    required this.author,
-    required this.likes,
-    this.userHasLiked = false
-  });
+  const DisplayCard(
+      {Key? key,
+      required this.title,
+      required this.content,
+      required this.author,
+      required this.likes,
+      this.userHasLiked = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+      contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,27 +30,29 @@ class DisplayCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       //route to report post screen
                     },
-                    child: Text(
+                    child: const Text(
                       "Report",
                       style: TextStyle(
-                          color: Color.fromRGBO(162, 156, 244, 1), fontSize: 12),
+                          color: Color.fromRGBO(162, 156, 244, 1),
+                          fontSize: 12),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Text(
                     title,
-                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w700, fontSize: 25),
                   ),
                 ],
               ),
               GestureDetector(
                 onTap: () => Navigator.of(context).pop(),
-                child: Icon(
+                child: const Icon(
                   Icons.close,
                   size: 35,
                   color: Color.fromRGBO(162, 156, 244, 1),
@@ -57,26 +60,24 @@ class DisplayCard extends StatelessWidget {
               )
             ],
           ),
+          const SizedBox(height: 10),
           SizedBox(
-            height: 10,
-          ),
-          Container(
-            height: MediaQuery.of(context).size.height/2.3,
+            height: MediaQuery.of(context).size.height / 2.3,
             child: SingleChildScrollView(
               child: Text(
-                  content, style: TextStyle(
-                fontSize: 16
-              ),),
+                content,
+                style: const TextStyle(fontSize: 16),
+              ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Row(
             children: [
-              CircleAvatar(
-                child: Icon(Icons.person),
+              const CircleAvatar(
                 radius: 20,
+                child: Icon(Icons.person),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
@@ -89,9 +90,9 @@ class DisplayCard extends StatelessWidget {
                           color: Color.fromRGBO(162, 156, 244, 1))),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   //add or remove like
                 },
                 child: Icon(

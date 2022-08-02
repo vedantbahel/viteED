@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ComposeCard extends StatefulWidget {
+  const ComposeCard({Key? key}) : super(key: key);
 
   @override
   State<ComposeCard> createState() => _ComposeCardState();
@@ -21,7 +22,7 @@ class _ComposeCardState extends State<ComposeCard> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+      contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,31 +37,31 @@ class _ComposeCardState extends State<ComposeCard> {
                     onTap: (){
                       //route to report post screen
                     },
-                    child: Text(
+                    child: const Text(
                       "Drafts",
                       style: TextStyle(
                           color: Color.fromRGBO(162, 156, 244, 1), fontSize: 12),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width/2.4,
                     child: TextField(
                       controller: _titleEditingController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: "Title",
                         border: InputBorder.none
                       ),
-                      style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25),
+                      style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 25),
                     ),
                   ),
                 ],
               ),
               GestureDetector(
                 onTap: () => Navigator.of(context).pop(),
-                child: Icon(
+                child: const Icon(
                   Icons.close,
                   size: 35,
                   color: Color.fromRGBO(162, 156, 244, 1),
@@ -68,19 +69,19 @@ class _ComposeCardState extends State<ComposeCard> {
               )
             ],
           ),
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height/2.3,
             child: SingleChildScrollView(
               child: TextField(
                 controller: _contentEditingController,
                 maxLines: 50,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: "Start typing to compose.."
                 ),
               ),
             ),
           ),
-          SizedBox(height: 5,),
+          const SizedBox(height: 5,),
           Center(child: TextButton(onPressed: (){
             //save as draft function
           },

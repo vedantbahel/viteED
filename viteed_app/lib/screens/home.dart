@@ -1,8 +1,9 @@
+import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:viteed_app/constants/app_constants.dart';
 import 'package:viteed_app/information.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:viteed_app/screens/profile.dart';
 import 'package:viteed_app/widgets/compose_card.dart';
 import 'package:viteed_app/widgets/display_card.dart';
 import '../providers/provider.dart';
@@ -12,8 +13,16 @@ class Home extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Future<User> user = globalAccount.get();
     final width = MediaQuery.of(context).size.width;
     final session = ref.watch(sessionProvider);
+    user.then((value) {
+      ref.read(currentUserProvider.notifier).state = value;
+    });
+    final userDoc = databases.getDocument(collectionId: AppConstants.userColl, documentId: session.userId);
+    userDoc.then((value) {
+      ref.read(userDocProvider.notifier).state = value;
+    });
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 229, 228, 247),
       appBar: AppBar(
@@ -69,9 +78,9 @@ class Home extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          showDialog(context: context, builder: (_)=> ComposeCard());
+          showDialog(context: context, builder: (_)=> const ComposeCard());
         },
-        child: Icon(Icons.add, size: 31,),
+        child: const Icon(Icons.add, size: 31,),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +88,7 @@ class Home extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20, top: 10),
             child: Text('Welcome ${session.userId} ☺',
-                style: GoogleFonts.poppins(textStyle: TextStyle(fontSize: 20))),
+                style: GoogleFonts.poppins(textStyle: const TextStyle(fontSize: 20))),
           ),
           Expanded(
             child: ListView.builder(
@@ -136,7 +145,7 @@ class Home extends ConsumerWidget {
               showDialog(
                   context: context,
                   builder: (_) {
-                    return DisplayCard(
+                    return const DisplayCard(
                         title: "Figma 101",
                         content:
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation"

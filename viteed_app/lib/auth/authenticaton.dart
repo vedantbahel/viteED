@@ -28,11 +28,20 @@ class Authentication {
     String pass,
     String name,
     String uname,
+    List<String> domains,
   ) async {
     Account account = Account(client);
     try {
       await account.create(
           userId: uname, email: email, password: pass, name: name);
+      databases.createDocument(
+        collectionId: AppConstants.userColl,
+        documentId: uname,
+        data: {
+          'topics': domains,
+          'name': name,
+        },
+      );
       return 'Account Created';
     } on AppwriteException catch (e) {
       return e.message!;

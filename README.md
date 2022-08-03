@@ -23,10 +23,8 @@ We also look forward to develop viteED web-app. Contributions and suggestions ar
 ## Database Structure 
 Following is the structure of database that has been created using Appwrite. 
 
-1. posts
-Columns: [postid, username, title, datetime, content, topics, status(posted or draft?)]
-2. users
-Columns: [username, avatar, topictags]  
+1. "posts" : [postid, username, title, datetime, content, topics, status(posted or draft?)]
+2. "users" : [$id, topics[], name, profilepic]  
  
 
 ## Code of Conduct 

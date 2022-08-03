@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:viteed_app/auth/authenticaton.dart';
 import '../constants/validators.dart';
 
-
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
@@ -32,11 +31,15 @@ class _LoginState extends State<Login> {
       ref,
     );
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(res),
-    ));
-    if (res == 'Logged in Successfully') {
-      return true;
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(res),
+      ));
+      if (res == 'Logged in Successfully') {
+        return true;
+      } else {
+        return false;
+      }
     } else {
       return false;
     }
@@ -152,13 +155,13 @@ class _LoginState extends State<Login> {
                           child: SizedBox(
                             width: 300.0,
                             height: 50.0,
-
                             child: Consumer(
                               builder: (context, ref, child) => ElevatedButton(
                                 onPressed: () {
                                   logIn(context, ref).then((value) {
                                     if (value) {
-                                      Navigator.pushNamed(context, '/bottomnav');
+                                      Navigator.pushNamed(
+                                          context, '/bottomnav');
                                     }
                                   });
                                   _passwordTextController.clear();
@@ -174,7 +177,6 @@ class _LoginState extends State<Login> {
                                       side: const BorderSide(
                                         color: Color.fromARGB(1, 162, 156, 244),
                                       ),
-
                                     ),
                                   ),
                                 ),

@@ -59,12 +59,14 @@ class _SignUpState extends State<SignUp> {
       selectedDomainsConfirm.map((domain) => domain!.name).toList(),
     );
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(res),
-    ));
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(res),
+      ));
 
-    if (res == 'Account Created') {
-      Navigator.pop(context);
+      if (res == 'Account Created') {
+        Navigator.pop(context);
+      }
     }
   }
 

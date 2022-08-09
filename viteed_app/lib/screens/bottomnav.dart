@@ -12,7 +12,7 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   int count = 0;
   final screens = [
-    const Home(),
+    Home(),
     const Center(child: Text("Message")),
     const Center(child: Text("Add")),
     const Center(child: Text("Save")),

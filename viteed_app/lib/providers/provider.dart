@@ -1,6 +1,9 @@
 import 'package:appwrite/models.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
 
+final showList = StateProvider((ref) => false);
+final controller = StateProvider((ref) => TextEditingController(text: ''));
 final sesiIdProvider = StateProvider((ref) => '');
 final sessionProvider = StateProvider<Session>((ref) => session1);
 final currentUserProvider = StateProvider<User>((ref) => user1);

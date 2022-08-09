@@ -9,17 +9,43 @@ import 'package:viteed_app/widgets/display_card.dart';
 import '../providers/provider.dart';
 
 class Home extends ConsumerWidget {
-  const Home({Key? key}) : super(key: key);
+  Home({Key? key}) : super(key: key);
+
+  final List<String> suggestions = [
+    "Trending",
+    "Recommendation",
+    "Flutter",
+    "Figma",
+    "Literature",
+    "Chemistry",
+    "Education",
+    "Science",
+  ];
+
+  List<dynamic> sortTopics(List<dynamic> topic, String key) {
+    List<dynamic> newTopic = [
+      {'name': key}
+    ];
+    for (int i = 0; i < topic.length; i++) {
+      if (topic[i]['name'] != key) {
+        newTopic.add(topic[i]);
+      }
+    }
+    return newTopic;
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Future<User> user = globalAccount.get();
+    final showSearch = ref.watch(showList);
+    final textEditingController = ref.watch(controller);
     final width = MediaQuery.of(context).size.width;
     final session = ref.watch(sessionProvider);
     user.then((value) {
       ref.read(currentUserProvider.notifier).state = value;
     });
-    final userDoc = databases.getDocument(collectionId: AppConstants.userColl, documentId: session.userId);
+    final userDoc = databases.getDocument(
+        collectionId: AppConstants.userColl, documentId: session.userId);
     userDoc.then((value) {
       ref.read(userDocProvider.notifier).state = value;
     });
@@ -61,6 +87,7 @@ class Home extends ConsumerWidget {
               width: 250,
               height: 40,
               child: TextField(
+                onTap: () => ref.read(showList.notifier).state = true,
                 scrollPadding: const EdgeInsets.only(left: 8, top: 20),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -69,55 +96,99 @@ class Home extends ConsumerWidget {
                   hintText: "Search",
                   contentPadding: const EdgeInsets.all(10),
                   suffixIcon: const Icon(Icons.search),
+                  prefixIcon: showSearch
+                      ? GestureDetector(
+                          onTap: () {
+                            ref.read(showList.notifier).state = false;
+                            ref.read(controller.notifier).state.text = '';
+                          },
+                          child: Icon(Icons.clear))
+                      : null,
                 ),
                 cursorColor: const Color.fromRGBO(162, 156, 244, 1),
+                controller: textEditingController,
               ),
             ),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          showDialog(context: context, builder: (_)=> const ComposeCard());
+        onPressed: () {
+          showDialog(context: context, builder: (_) => const ComposeCard());
         },
-        child: const Icon(Icons.add, size: 31,),
+        child: const Icon(
+          Icons.add,
+          size: 31,
+        ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20, top: 10),
-            child: Text('Welcome ${session.userId} ☺',
-                style: GoogleFonts.poppins(textStyle: const TextStyle(fontSize: 20))),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: topics.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.only(top: 8, bottom: 12),
-                  padding: const EdgeInsets.only(left: 20),
-                  height: 190,
-                  width: width,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        topics[index]["name"]!,
-                        style: GoogleFonts.poppins(
-                            textStyle: const TextStyle(
-                                fontSize: 25,
-                                color: Color.fromRGBO(162, 156, 244, 1))),
-                      ),
-                      scrollbarBuild(),
-                    ],
+      body: showSearch
+          ? Container(
+              child: ListView.builder(
+                  itemCount: suggestions.length,
+                  itemBuilder: (BuildContext _, int index) => Container(
+                        //Changethisfor theui
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                ref.read(controller.notifier).state.text =
+                                    suggestions[index];
+                                ref.read(showList.notifier).state = false;
+                                topics = sortTopics(topics, suggestions[index]);
+                              },
+                              child: Container(
+                                height: 20,
+                                color: Colors.yellow,
+                                child: Text(
+                                  suggestions[index],
+                                  style: TextStyle(),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        ),
+                      )))
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 10),
+                  child: Text('Welcome ${session.userId} ☺',
+                      style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(fontSize: 20))),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: topics.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.only(top: 8, bottom: 12),
+                        padding: const EdgeInsets.only(left: 20),
+                        height: 190,
+                        width: width,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              topics[index]["name"]!,
+                              style: GoogleFonts.poppins(
+                                  textStyle: const TextStyle(
+                                      fontSize: 25,
+                                      color: Color.fromRGBO(162, 156, 244, 1))),
+                            ),
+                            scrollbarBuild(),
+                          ],
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
       //       floatingActionButton: FloatingActionButton(
       //   tooltip: 'LogOut',
       //   onPressed: () {

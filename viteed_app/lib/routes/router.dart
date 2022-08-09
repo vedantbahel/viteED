@@ -13,7 +13,7 @@ final appRoutes = <GoRoute>[
   _generateGoRoute(AppRouteNames.loginScreen, const Login()),
   _generateGoRoute(AppRouteNames.signUpScreen, const SignUp()),
   _generateGoRoute(AppRouteNames.passwordResetScreen, PasswordReset()),
-  _generateGoRoute(AppRouteNames.homeScreen, const Home()),
+  _generateGoRoute(AppRouteNames.homeScreen, Home()),
   _generateGoRoute(AppRouteNames.forgotPasswordScreen, ForgotPassword()),
 ];
 

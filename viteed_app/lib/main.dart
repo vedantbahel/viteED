@@ -33,10 +33,10 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: {
-        '/': (context) => const Login(),
-        '/login': (context) => const Login(),
+        '/': (context) => Home(),
+        // '/login': (context) => const Login(),
         '/bottomnav': (context) => const BottomNav(),
-        '/home': (context) => const Home(),
+        '/home': (context) => Home(),
         '/forgotPassword': (context) => ForgotPassword(),
         '/signUp': (context) => const SignUp(),
         '/Profile': (context) => const Profile(),

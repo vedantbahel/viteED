@@ -1,5 +1,5 @@
 import 'package:appwrite/appwrite.dart';
-import 'package:appwrite/models.dart';
+import 'package:appwrite/models.dart' as models;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:viteed_app/constants/app_constants.dart';
@@ -12,7 +12,7 @@ class Authentication {
     WidgetRef ref,
   ) async {
     Account account = Account(client);
-    Session user;
+    models.Session user;
     try {
       user = await account.createEmailSession(email: email, password: pass);
       ref.read(sesiIdProvider.notifier).state = user.$id;
@@ -35,6 +35,7 @@ class Authentication {
       await account.create(
           userId: uname, email: email, password: pass, name: name);
       databases.createDocument(
+        databaseId: AppConstants.databaseId,
         collectionId: AppConstants.userColl,
         documentId: uname,
         data: {

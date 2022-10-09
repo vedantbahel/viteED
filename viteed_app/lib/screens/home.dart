@@ -36,7 +36,7 @@ class Home extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Future<User> user = globalAccount.get();
+    Future<Account> user = globalAccount.get();
     final showSearch = ref.watch(showList);
     final textEditingController = ref.watch(controller);
     final width = MediaQuery.of(context).size.width;
@@ -45,6 +45,7 @@ class Home extends ConsumerWidget {
       ref.read(currentUserProvider.notifier).state = value;
     });
     final userDoc = databases.getDocument(
+      databaseId: AppConstants.databaseId,
         collectionId: AppConstants.userColl, documentId: session.userId);
     userDoc.then((value) {
       ref.read(userDocProvider.notifier).state = value;

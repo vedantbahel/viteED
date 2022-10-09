@@ -6,26 +6,26 @@ final showList = StateProvider((ref) => false);
 final controller = StateProvider((ref) => TextEditingController(text: ''));
 final sesiIdProvider = StateProvider((ref) => '');
 final sessionProvider = StateProvider<Session>((ref) => session1);
-final currentUserProvider = StateProvider<User>((ref) => user1);
+final currentUserProvider = StateProvider<Account>((ref) => user1);
 final userDocProvider = StateProvider<Document>((ref) => document);
 
 Document document = Document(
     $id: '',
-    $collection: '',
-    $createdAt: 0,
-    $updatedAt: 0,
-    $read: [],
-    $write: [],
+    $collectionId: '',
+    $createdAt: '',
+    $updatedAt: '',
+    $databaseId: '',
+    $permissions: [],
     data: {});
 
-User user1 = User(
+Account user1 = Account(
   $id: '',
-  $createdAt: 0,
-  $updatedAt: 0,
+  $createdAt: '',
+  $updatedAt: '',
   name: '',
-  registration: 0,
+  registration: '',
   status: false,
-  passwordUpdate: 0,
+  passwordUpdate: '',
   email: '',
   phone: '',
   emailVerification: false,
@@ -37,13 +37,13 @@ User user1 = User(
 
 Session session1 = Session(
   $id: '',
-  $createdAt: 1588888888,
+  $createdAt: '',
   userId: '',
-  expire: 1588888888,
+  expire: '',
   provider: '',
   providerUid: '',
   providerAccessToken: '',
-  providerAccessTokenExpiry: 1588888888,
+  providerAccessTokenExpiry: '',
   providerRefreshToken: '',
   ip: '',
   osCode: '',

@@ -2,7 +2,7 @@ import 'package:appwrite/appwrite.dart';
 
 Client client = Client();
 Account globalAccount = Account(client);
-Databases databases = Databases(client, databaseId: AppConstants.databaseId);
+Databases databases = Databases(client);
 
 class AppConstants {
   AppConstants._();

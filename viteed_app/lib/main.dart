@@ -8,6 +8,7 @@ import 'package:viteed_app/screens/home.dart';
 import 'package:viteed_app/screens/login.dart';
 import 'package:viteed_app/screens/profile.dart';
 import 'package:viteed_app/screens/signup.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(
@@ -21,10 +22,34 @@ void main() {
       .setSelfSigned(status: true);
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isLogin = false;
+
+  Future<void> checkLogin() {
+    Future<SharedPreferences> prefs = SharedPreferences.getInstance();
+    prefs.then((value) {
+      if (value.getBool('login') != null) {
+        setState(() {
+          isLogin = value.getBool('login')!;
+        });
+      }
+    });
+    return Future.value();
+  }
+
+  @override
+  void initState() {
+    checkLogin();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,7 +58,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: {
-        '/': (context) => const Login(),
+        '/': (context) => isLogin ? const BottomNav() : const Login(),
         '/login': (context) => const Login(),
         '/bottomnav': (context) => const BottomNav(),
         '/home': (context) => Home(),

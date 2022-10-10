@@ -1,6 +1,6 @@
-import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:viteed_app/constants/app_constants.dart';
 import 'package:viteed_app/information.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,17 +36,25 @@ class Home extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Future<Account> user = globalAccount.get();
+    Future<SharedPreferences> prefs = SharedPreferences.getInstance();
+    prefs.then((value) => {
+          if (value.getBool('login') == true)
+            {
+              ref.read(sessIdProvider.notifier).state = value.getString('id')!,
+              ref.read(userNameProvider.notifier).state =
+                  value.getString('userId')!,
+              ref.read(emailProvider.notifier).state =
+                  value.getString('email')!,
+            }
+        });
     final showSearch = ref.watch(showList);
     final textEditingController = ref.watch(controller);
     final width = MediaQuery.of(context).size.width;
-    final session = ref.watch(sessionProvider);
-    user.then((value) {
-      ref.read(currentUserProvider.notifier).state = value;
-    });
+    final uname = ref.watch(userNameProvider);
     final userDoc = databases.getDocument(
-      databaseId: AppConstants.databaseId,
-        collectionId: AppConstants.userColl, documentId: session.userId);
+        databaseId: AppConstants.databaseId,
+        collectionId: AppConstants.userColl,
+        documentId: uname);
     userDoc.then((value) {
       ref.read(userDocProvider.notifier).state = value;
     });
@@ -103,7 +111,7 @@ class Home extends ConsumerWidget {
                             ref.read(showList.notifier).state = false;
                             ref.read(controller.notifier).state.text = '';
                           },
-                          child: Icon(Icons.clear))
+                          child: const Icon(Icons.clear))
                       : null,
                 ),
                 cursorColor: const Color.fromRGBO(162, 156, 244, 1),
@@ -123,42 +131,36 @@ class Home extends ConsumerWidget {
         ),
       ),
       body: showSearch
-          ? Container(
-              child: ListView.builder(
-                  itemCount: suggestions.length,
-                  itemBuilder: (BuildContext _, int index) => Container(
-                        //Changethisfor theui
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                ref.read(controller.notifier).state.text =
-                                    suggestions[index];
-                                ref.read(showList.notifier).state = false;
-                                topics = sortTopics(topics, suggestions[index]);
-                              },
-                              child: Container(
-                                height: 20,
-                                color: Colors.yellow,
-                                child: Text(
-                                  suggestions[index],
-                                  style: TextStyle(),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                          ],
+          ? ListView.builder(
+              itemCount: suggestions.length,
+              itemBuilder: (BuildContext _, int index) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          ref.read(controller.notifier).state.text =
+                              suggestions[index];
+                          ref.read(showList.notifier).state = false;
+                          topics = sortTopics(topics, suggestions[index]);
+                        },
+                        child: Container(
+                          height: 20,
+                          color: Colors.yellow,
+                          child: Text(
+                            suggestions[index],
+                            style: const TextStyle(),
+                          ),
                         ),
-                      )))
+                      ),
+                      const SizedBox(height: 10),
+                    ],
+                  ))
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 20, top: 10),
-                  child: Text('Welcome ${session.userId} ☺',
+                  child: Text('Welcome $uname ☺',
                       style: GoogleFonts.poppins(
                           textStyle: const TextStyle(fontSize: 20))),
                 ),

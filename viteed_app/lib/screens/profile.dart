@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:viteed_app/auth/authenticaton.dart';
+import 'package:viteed_app/screens/login.dart';
 import '../providers/provider.dart';
 
 class Profile extends ConsumerWidget {
@@ -10,7 +12,8 @@ class Profile extends ConsumerWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final userDoc = ref.read(userDocProvider);
-    final currUser = ref.read(currentUserProvider);
+    final email = ref.read(emailProvider);
+    final sesid = ref.watch(sessIdProvider);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 229, 228, 247),
       appBar: AppBar(
@@ -78,7 +81,7 @@ class Profile extends ConsumerWidget {
               child: Row(
                 children: [
                   Text(
-                    currUser.email,
+                    email,
                     style: GoogleFonts.poppins(fontSize: 18),
                   ),
                   const Spacer(),
@@ -151,22 +154,31 @@ class Profile extends ConsumerWidget {
                 ],
               ),
             ),
-            Container(
-              height: 60,
-              width: width,
-              padding: const EdgeInsets.all(15),
-              margin: const EdgeInsets.only(
-                  top: 10, left: 40, right: 40, bottom: 10),
-              decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 232, 105, 95),
-                  border: Border.all(
-                      color: const Color.fromRGBO(162, 156, 244, 1), width: 2),
-                  borderRadius: BorderRadius.circular(15)),
-              child: Center(
-                child: Text(
-                  "Log Out",
-                  style: GoogleFonts.poppins(
-                      fontSize: 20, fontWeight: FontWeight.w600),
+            Padding(
+              padding: const EdgeInsets.only(left: 100.0, right: 100.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Authentication().logout(ref, sesid, context);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Login(),
+                    ),
+                  );
+                },
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    "Log Out",
+                    style: GoogleFonts.poppins(
+                        fontSize: 20, fontWeight: FontWeight.w600),
+                  ),
                 ),
               ),
             ),
